@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 1 Javascript</title>
+    <style>
+        body {
+            text-align: center;
+            font-size: larger;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task 1</h1>
+    <br>
+    <p>Enter a number and click the button to reverse it:</p>
+
+    <!-- Input field for the user to enter a number -->
+    <input type="number" id="userInput" placeholder="Enter a number">
+
+    <!-- Button to trigger the reversal of the number -->
+    <button onclick="reverseAndDisplay()">Reverse</button>
+
+    <!-- Display the reversed number here -->
+    <p id="result"></p>
+
+    <script>
+        function reverseNumber(x) {
+            // Convert the number to a string
+            let str = x.toString();
+
+            // Reverse the string
+            let reversedStr = str.split('').reverse().join('');
+
+            // Convert the reversed string back to a number
+            let reversedNumber = parseInt(reversedStr, 10);
+
+            return reversedNumber;
+        }
+
+        function reverseAndDisplay() {
+            // Get user input
+            const userInput = document.getElementById("userInput").value;
+
+            // Convert the user input to a number
+            const num = parseFloat(userInput);
+
+            if (!isNaN(num)) {
+                const reversed = reverseNumber(num);
+                document.getElementById("result").textContent = `Reversed number: ${reversed}`;
+            } else {
+                document.getElementById("result").textContent = "Invalid input. Please enter a valid number.";
+            }
+        }
+    </script>
+</body>
+</html>
