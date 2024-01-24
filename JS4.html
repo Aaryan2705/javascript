@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task 4 Javascript</title>
+  <style>
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      margin-top: 30px;
+      padding: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-width: auto;
+    }
+
+    .header-container {
+      text-align: center;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .showdate,
+    .showtime {
+      width: 50%;
+      text-align: center;
+      font-size: large;
+      padding: 10px;
+      border: 1px solid #cccccca4;
+      border-radius: 5px;
+    }
+
+    .footer-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header-container">
+      <h1>Task-4</h1>
+    </header>
+
+    <main class="main-container">
+      <p>
+        <button type="button" onclick="updateDate()">Show Date</button>
+      </p>
+
+      <div id="showdate" class="showdate hidden" style="display:none">
+        <span>Date</span>
+        <span id="date"></span>
+      </div>
+
+      <p>
+        <button type="button" onclick="updateTime()">Show Time</button>
+      </p>
+
+      <div id="showtime" class="showtime hidden" style="display:none">
+        <span>Time</span>
+        <span id="time"></span>
+        <span>(GMT+05:30) Indian Standard Time (IST)</span>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function updateDate() {
+      // Get the current date.
+      var date = new Date();
+
+      // Format the date.
+      var formattedDate = date.toLocaleDateString();
+
+      // Update the HTML element with the formatted date.
+      document.getElementById("date").innerHTML = formattedDate;
+
+      // Show the date div and remove the hidden class.
+      document.getElementById("showdate").style.display = "block";
+      document.getElementById("showdate").classList.remove("hidden");
+    }
+
+    function updateTime() {
+      // Get the current time.
+      var time = new Date();
+
+      // Format the time.
+      var formattedTime = time.toLocaleTimeString();
+
+      // Update the HTML element with the formatted time.
+      document.getElementById("time").innerHTML = formattedTime;
+
+      // Show the time div and remove the hidden class.
+      document.getElementById("showtime").style.display = "block";
+      document.getElementById("showtime").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
