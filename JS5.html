@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5 Javascript</title>
+    <style>
+        #contact label {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+        #contact_submit {
+            padding-left: 100px;
+        }
+        #contact div {
+            margin-top: 1em;
+        }
+        textarea {
+            vertical-align: top;
+            height: 5em;
+        }
+        .error {
+            display: none;
+            margin-left: 10px;
+        }
+        .error_show {
+            color: red;
+            margin-left: 10px;
+        }
+        input.invalid,
+        textarea.invalid {
+            border: 2px solid red;
+        }
+        input.valid,
+        textarea.valid {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" align="center">
+        <header class="header-container">
+            <h1>Task-5</h1>
+        </header>
+    
+        <form id="contact" method="post" action="">
+            <div>
+                <label for="contact_name">Name:</label>
+                <input type="text" id="contact_name" name="name">
+                <span class="error" id="name_error">This field is required</span>
+            </div>
+            <div>
+                <label for="contact_email">Email:</label>
+                <input type="email" id="contact_email" name="email">
+                <span class="error" id="email_error">A valid email address is required</span>
+            </div>
+            <div>
+                <label for="contact_website">Website:</label>
+                <input type="url" id="contact_website" name="website">
+                <span class="error" id="website_error">A valid URL is required</span>
+            </div>
+            <div>
+                <label for="contact_message">Message:</label>
+                <textarea id="contact_message" name="message"></textarea>
+                <span class="error" id="message_error">This field is required</span>
+            </div>
+            <div id="contact_submit">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Individual field validation for the "Name" field
+            var nameInput = document.getElementById('contact_name');
+            var nameError = document.getElementById('name_error');
+
+            nameInput.addEventListener('blur', function () {
+                if (nameInput.value.trim() === '') {
+                    nameError.classList.remove('error');
+                    nameError.classList.add('error_show');
+                } else {
+                    nameError.classList.remove('error_show');
+                    nameError.classList.add('error');
+                }
+            });
+
+            // Individual field validation for the "Email" field
+            var emailInput = document.getElementById('contact_email');
+            var emailError = document.getElementById('email_error');
+
+            emailInput.addEventListener('blur', function () {
+                var emailValue = emailInput.value.trim();
+                if (emailValue === '') {
+                    emailError.classList.remove('error');
+                    emailError.classList.add('error_show');
+                } else {
+                    // Use a regular expression to validate the email format
+                    var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    if (!emailRegex.test(emailValue)) {
+                        emailError.classList.remove('error');
+                        emailError.classList.add('error_show');
+                    } else {
+                        emailError.classList.remove('error_show');
+                        emailError.classList.add('error');
+                    }
+                }
+            });
+
+            // Individual field validation for the "Website" field
+            var websiteInput = document.getElementById('contact_website');
+            var websiteError = document.getElementById('website_error');
+
+            websiteInput.addEventListener('blur', function () {
+                var websiteValue = websiteInput.value.trim();
+                if (websiteValue === '') {
+                    websiteError.classList.remove('error');
+                    websiteError.classList.add('error_show');
+                } else {
+                    // Use a regular expression to validate the URL format
+                    var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+                    if (!urlRegex.test(websiteValue)) {
+                        websiteError.classList.remove('error');
+                        websiteError.classList.add('error_show');
+                    } else {
+                        websiteError.classList.remove('error_show');
+                        websiteError.classList.add('error');
+                    }
+                }
+            });
+
+            // Individual field validation for the "Message" field
+            var messageInput = document.getElementById('contact_message');
+            var messageError = document.getElementById('message_error');
+
+            messageInput.addEventListener('blur', function () {
+                if (messageInput.value.trim() === '') {
+                    messageError.classList.remove('error');
+                    messageError.classList.add('error_show');
+                } else {
+                    messageError.classList.remove('error_show');
+                    messageError.classList.add('error');
+                }
+            });
+
+            // After Form Submitted Validation
+            document.querySelector('#contact_submit button').addEventListener('click', function (event) {
+                var error_free = true;
+
+                // Validate the "Name" field
+                if (nameInput.value.trim() === '') {
+                    nameError.classList.remove('error');
+                    nameError.classList.add('error_show');
+                    error_free = false;
+                } else {
+                    nameError.classList.remove('error_show');
+                    nameError.classList.add('error');
+                }
+
+                // Validate the "Email" field
+                var emailValue = emailInput.value.trim();
+                if (emailValue === '') {
+                    emailError.classList.remove('error');
+                    emailError.classList.add('error_show');
+                    error_free = false;
+                } else {
+                    var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                    if (!emailRegex.test(emailValue)) {
+                        emailError.classList.remove('error');
+                        emailError.classList.add('error_show');
+                        error_free = false;
+                    } else {
+                        emailError.classList.remove('error_show');
+                        emailError.classList.add('error');
+                    }
+                }
+
+                // Validate the "Website" field
+                var websiteValue = websiteInput.value.trim();
+                if (websiteValue === '') {
+                    websiteError.classList.remove('error');
+                    websiteError.classList.add('error_show');
+                    error_free = false;
+                } else {
+                    var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+                    if (!urlRegex.test(websiteValue)) {
+                        websiteError.classList.remove('error');
+                        websiteError.classList.add('error_show');
+                        error_free = false;
+                    } else {
+                        websiteError.classList.remove('error_show');
+                        websiteError.classList.add('error');
+                    }
+                }
+
+                // Validate the "Message" field
+                if (messageInput.value.trim() === '') {
+                    messageError.classList.remove('error');
+                    messageError.classList.add('error_show');
+                    error_free = false;
+                } else {
+                    messageError.classList.remove('error_show');
+                    messageError.classList.add('error');
+                }
+
+                if (!error_free) {
+                    event.preventDefault();
+                } else {
+                    alert('No errors: Form will be submitted');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
