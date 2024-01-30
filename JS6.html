@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 6 Javascript</title>
+   <style>
+    * {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: #eee;
+}
+
+#wrapper {
+  width: 500px;
+  height: 50%;
+  overflow: hidden;
+  border: 0px solid #000;
+  margin: 50px auto;
+  padding: 10px;
+}
+
+.main-content {
+  width: 250px;
+  height: 280px;
+  margin: 10px auto;
+  background-color: #fffcfc7d;
+  border: 2px solid #bfbfbf;
+  padding: 40px 50px;
+  box-shadow: 0 0 10px rgba(208, 208, 208, 0.41);
+}
+
+.header {
+  border: 0px solid #000;
+  margin-bottom: 5px;
+}
+
+.header img {
+  height: 50px;
+  width: 175px;
+  margin: auto;
+  position: relative;
+  left: 40px;
+}
+
+.input-1 {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border: 1px solid #dbdbdb;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.input-2 {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border: 1px solid #dbdbdb;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+.overlap-text {
+  position: relative;
+}
+
+.overlap-text a {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: #003569;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: 'Overpass Mono', monospace;
+    letter-spacing: -1px;
+
+}
+
+.overlap-text input[type="text"],
+.overlap-text input[type="password"] {
+    padding-left: 30px;
+}
+
+.btn {
+  width: 100%;
+  background-color: #3897f0;
+  border: 1px solid #3897f0;
+  padding: 5px 12px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.sub-content {
+  width: 250px;
+  height: 40%;
+  margin: 10px auto;
+  border: 1px solid #e6e6e6;
+  padding: 20px 50px;
+  background-color: #fff;
+}
+
+.s-part {
+  text-align: center;
+  font-family: 'Overpass Mono', monospace;
+  word-spacing: -3px;
+  letter-spacing: -2px;
+  font-weight: normal;
+}
+
+.s-part a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #3897f0;
+  font-family: 'Overpass Mono', monospace;
+  word-spacing: -3px;
+  letter-spacing: -2px;
+  font-weight: normal;
+}
+
+input:focus {
+    background-color: rgb(199, 198, 198);
+}
+
+/* Position the icons absolutely so they are aligned with the input fields */
+.fa {
+  position: absolute ;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+}
+
+.l-part a {
+  float: right;
+}
+
+   </style>
+</head>
+
+<body>
+
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower:italic|Overpass+Mono:italic" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div id="wrapper">
+        <div class="main-content">
+            <div class="header">
+                <img src="https://i.imgur.com/zqpwkLQ.png" />
+            </div>
+            <div class="l-part">
+                <div class="overlap-text">
+                    <i class="fa fa-user"></i>
+                    <input type="text" placeholder="Username" class="input-1" />
+                    <div class="error-message" style="color: red;"></div>
+                </div>
+                <div class="overlap-text">
+                    <i class="fa fa-lock"></i>
+                
+                    <input type="password" placeholder="Password" class="input-2" />
+                    <div class="error-message" style="color: red;"></div>
+                </div>
+                <br>
+                <input type="button" value="Log in" class="btn" />
+                <br> <br>
+                <input type="checkbox" name="remember_me" value="true" class="remember-me"> Remember me
+                <a href="https://www.instagram.com/accounts/password/reset/" target="_blank">Forgot Password</a>
+            </div>
+
+        </div>
+        <div class="sub-content">
+            <div class="s-part">
+                Don't have an account?<a href="https://www.instagram.com/accounts/emailsignup/" target="_blank">Sign up</a>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // Get the username and password input fields, the login button, and the error message elements
+        const usernameInput = document.querySelector('.input-1');
+        const passwordInput = document.querySelector('.input-2');
+        const loginButton = document.querySelector('.btn');
+        const errorMessages = document.querySelectorAll('.error-message');
+
+        // Function to display an error message under the respective field
+        function displayError(elementIndex, message) {
+            errorMessages[elementIndex].textContent = message;
+        }
+
+        // Function to validate the inputs
+        function validateInputs() {
+            const usernameValue = usernameInput.value.trim();
+            const passwordValue = passwordInput.value.trim();
+
+            // Clear any previous error messages
+            errorMessages.forEach((message) => {
+                message.textContent = '';
+            });
+
+            if (usernameValue === '') {
+                displayError(0, 'Username required');
+            }
+
+            if (passwordValue === '') {
+                displayError(1, 'Password required');
+            }
+
+            if (usernameValue !== '' && passwordValue !== '') {
+                // Perform your login logic here
+                // For now, we'll just log the values
+                console.log('Username:', usernameValue);
+                console.log('Password:', passwordValue);
+            }
+        }
+
+        // Add a click event listener to the login button
+        loginButton.addEventListener('click', validateInputs);
+    </script>
+    
+</body>
+</html>
