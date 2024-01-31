@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 7 JavaScript</title>
+    <style>
+        #container {
+            text-align: center;
+            margin-top: 280px;
+            font-weight: bold;
+            color: blue;
+        }
+
+        #i1 {
+            position: absolute;
+            left: 100px;
+            top: 150px;
+            
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Task-7</h1></center>
+    <div id="container">
+        <img id="i1" src="..\Javascript\images\Train.jpg" />
+    </div>
+  
+    <div id="container">
+        <form>
+            <center>
+                <p><h1>Click the below button to handle animation</h1></p>
+                <input type="button" onClick="timer()" value="Start">
+                <input type="button" onClick="reset1()" value="Stop">
+            </center>
+        </form>
+    </div>
+
+    <center>
+        <div id="msg"></div>
+    </center>
+
+    <script >
+        var dir = 'right';
+        var my_time;
+
+        function reset1() {
+            clearTimeout(my_time);
+            document.getElementById('i1').style.left = "100px";
+            document.getElementById('i1').style.top = "100px";
+            document.getElementById("msg").innerHTML = "";
+        }
+
+        function disp() {
+            var step = 5;
+
+            var x = parseInt(document.getElementById('i1').style.left);
+
+            if (x >= 2000) {
+                dir = 'left';
+            }
+            if (x <= 100) {
+                dir = 'right';
+            }
+
+            if (dir == 'right') {
+                x = x + step;
+            } else {
+                x = x - step;
+            }
+
+            document.getElementById('i1').style.left = x + "px";
+        }
+
+        function timer() {
+            disp();
+            var x = parseInt(document.getElementById('i1').style.left);
+            document.getElementById("msg").innerHTML = "X: " + x;
+            my_time = setTimeout(timer, 10);
+        }
+
+        function startMoving() {
+            if (!my_time) {
+                timer(); // Start the timer
+            }
+        }
+
+        function stopMoving() {
+            clearTimeout(my_time);
+            my_time = null;
+        }
+
+        window.onload = function () {
+            reset1(); // Reset image position on page load
+        };
+    </script>
+</body>
+</html>
