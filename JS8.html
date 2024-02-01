@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task 8 Javascript</title>
+  <style>
+     body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .container {
+      width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 2px solid #333;
+      background: linear-gradient(to right, #FF91AF, #FFF94C);
+      background: linear-gradient(to bottom, #FF91AF, #FFF94C)
+    }
+
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      flex: 1;
+      text-align: left;
+      margin-right: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+      flex: 2;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      background-color: #fb3469;
+      color: #fff;
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+
+    .form-group input[type="checkbox"]{
+      transform: scale(0.65);
+    }
+
+    .gender-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .gender-group label {
+      margin-right: 5px;
+    }
+
+    .gender-group input[type="radio"] {
+      flex: initial;
+      margin-right: 5px; 
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none; /* Initially hide error messages */
+    }
+  </style>
+</head>
+<body>
+  <h1>Task-8</h1>
+
+  <div class="container">
+    <center>
+      <p><h2>Registration Form</h2></p>
+    </center>
+    <form action="/register" method="post">
+
+     <div class="form-group">
+        <label>First Name</label>
+        <input type="text" name="first_name" placeholder=" Enter Your First Name"/>
+      </div>
+      <div class="error-message" id="error-first-name">Please enter your first name.</div>
+
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" name="last_name" placeholder=" Enter Your Last Name">
+      </div>
+      
+      <div class="error-message" id="error-last-name">Please enter your last name.</div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter Your Email">
+      </div>
+      <div class="error-message" id="error-email">Please enter a valid email address.</div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter Password">
+      </div>
+      <div class="error-message" id="error-password">Please enter a password.</div>
+
+      <div class="form-group">
+        <label>Re-enter Password</label>
+        <input type="password" name="password_confirmation" placeholder="Re-enter Password">
+      </div>
+      <div class="error-message" id="error-password-confirmation">Please re-enter your password.</div>
+
+      <div class="form-group gender-group">
+        <label for="gen">Gender:</label>
+        <input type="radio" name="Gender" value="Male"/>
+        <label for="Gender">Male</label>
+        <input type="radio" name="Gender" value="Female"/>
+        <label for="Gender">Female</label>
+      </div>
+      <div class="error-message" id="error-gender">Please select your gender.</div>
+
+      <br>
+      <div class="form-group">
+        <label>Age </label>
+        <input type="number" name="age" placeholder="Enter Your Age">
+      </div>
+      <div class="error-message" id="error-age">Please enter your Age</div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone_number" placeholder="Enter Your Phone Number">
+      </div>
+      <div class="error-message" id="error-phone-number">Please enter your phone_number</div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" name="address" placeholder="Enter Your Address">
+      </div>
+      <div class="error-message" id="error-address">Please enter your Address</div>
+
+      <div class="form-group">
+        <label>State</label>
+        <input type="text" name="state" placeholder="Enter Your State">
+      </div>
+      <div class="error-message" id="error-state">Please enter your State</div>
+
+      <div class="form-group">
+        <label>Country</label>
+        <select name="country">
+          <option value="">Choose Your country</option>
+          <option value="India">India</option>
+          <option value="United States">United States</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="Canada">Canada</option>
+        </select>
+      </div>
+       <div class="error-message" id="error-country">Please select your country</div>
+
+      <div class="form-group">
+        <label>Languages Known</label>
+        <input type="checkbox" name="language" value="English">
+        <label>English</label>
+        <input type="checkbox" name="language" value="Kannada">
+        <label>Kannada</label>
+        <input type="checkbox" name="language" value="Hindi">
+        <label>Hindi</label>
+        <input type="checkbox" name="language" value="Telugu">
+        <label>Telugu</label>
+      </div>
+      <div class="error-message" id="error-language">Please select your Languages</div>
+
+      <div class="end">
+        <input type="checkbox" name="declaration" value="true">
+        <label for="declaration">I hereby declare all the given details are true</label>
+      </div>
+      <div class="error-message" id="error-declaration">Please select the checkbox</div>
+
+      <div class="end" id="right" align="right">
+        Log in to <a href="https://ethnus.com">Ethnus</a> Website
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+  </div>
+  <script>
+    const form = document.querySelector("form");
+
+// Function to check password strength
+function isWeakPassword(password) {
+  return password.length < 8; // Determines password Strength
+}
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  // Reset error messages
+  const errorMessages = document.querySelectorAll(".error-message");
+  errorMessages.forEach((errorMessage) => {
+    errorMessage.style.display = "none";
+  });
+
+  // Validate required fields
+  let hasErrors = false;
+
+  const firstName = form.querySelector("input[name='first_name']");
+  const lastName = form.querySelector("input[name='last_name']");
+  const emailAddress = form.querySelector("input[type=email]");
+  const password = form.querySelector("input[name='password']");
+  const passwordConfirmation = form.querySelector("input[name='password_confirmation']");
+  const genderMale = form.querySelector("input[name='Gender'][value='Male']");
+  const genderFemale = form.querySelector("input[name='Gender'][value='Female']");
+  const age = form.querySelector("input[name='age']");
+  const phoneNumber = form.querySelector("input[name='phone_number']");
+  const address = form.querySelector("input[name='address']");
+  const state = form.querySelector("input[name='state']");
+  const country = form.querySelector("select[name='country']");
+  const languageCheckboxes = form.querySelectorAll("input[name='language']");
+  const declarationCheckbox = form.querySelector("input[name='declaration']");
+
+
+  if (!firstName.value) {
+    document.getElementById("error-first-name").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!lastName.value) {
+    document.getElementById("error-last-name").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!password.value) {
+    document.getElementById("error-password").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!passwordConfirmation.value) {
+    document.getElementById("error-password-confirmation").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (password.value !== passwordConfirmation.value) {
+    document.getElementById("error-password-confirmation").textContent = "Passwords do not match.";
+    document.getElementById("error-password-confirmation").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (isWeakPassword(password.value)) {
+    document.getElementById("error-password").textContent = "Password is weak.";
+    document.getElementById("error-password").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!emailAddress.value) {
+    document.getElementById("error-email").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!genderMale.checked && !genderFemale.checked) {
+    document.getElementById("error-gender").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!age.value) {
+    document.getElementById("error-age").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!phoneNumber.value) {
+    document.getElementById("error-phone-number").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!address.value) {
+    document.getElementById("error-address").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!state.value) {
+    document.getElementById("error-state").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!country.value) {
+    document.getElementById("error-country").style.display = "block";
+    hasErrors = true;
+  }
+
+  let languageChecked = false;
+  for (const checkbox of languageCheckboxes) {
+    if (checkbox.checked) {
+      languageChecked = true;
+      break;
+    }
+  }
+  if (!languageChecked) {
+    document.getElementById("error-languages").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!declarationCheckbox.checked) {
+    document.getElementById("error-declaration").style.display = "block";
+    hasErrors = true;
+  }
+
+  if (!hasErrors) {
+    form.submit();
+  }
+});
+
+
+  </script>
+  
+</body>
+</html>
